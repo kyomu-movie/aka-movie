@@ -1,0 +1,4 @@
+interface:
+  display_name: "Movie Create"
+  short_description: "Create shared step-animation videos locally"
+  default_prompt: "Use $movie-create to turn this script into a reviewed step-animation video."

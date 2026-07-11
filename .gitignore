@@ -1,0 +1,10 @@
+node_modules/
+.next/
+data/
+export/
+.env*
+!.env.example
+*.mp4
+!shared-videos/**/*.mp4
+*.log
+*.tsbuildinfo

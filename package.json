@@ -1,0 +1,36 @@
+{
+  "name": "script-motion-studio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "node .next/standalone/server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "codex:new": "tsx scripts/create-codex-project.ts",
+    "codex:render": "tsx scripts/render-codex-video.ts",
+    "codex:share": "tsx scripts/share-codex-video.ts",
+    "codex:install-skill": "powershell -ExecutionPolicy Bypass -File scripts/install-codex-skill.ps1"
+  },
+  "dependencies": {
+    "@fontsource/noto-sans-jp": "^5.1.1",
+    "@libsql/client": "^0.15.7",
+    "@remotion/bundler": "^4.0.277",
+    "@remotion/renderer": "^4.0.277",
+    "next": "^15.3.3",
+    "openai": "^5.12.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.2",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.1"
+  }
+}
