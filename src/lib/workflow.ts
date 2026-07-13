@@ -4,6 +4,7 @@ import OpenAI, { toFile } from "openai";
 import sharp from "sharp";
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
+import { normalizeAnimation } from "@/lib/animation";
 import { IMAGE, VIDEO } from "@/lib/constants";
 import { getVideoDurationFrames } from "@/lib/naming";
 import { DATA_DIR, REFERENCE_DIR, ROOT, RULE_DIR, SKILL_DIR, ensureWorkspaceFolders, projectPaths } from "@/lib/paths";
@@ -187,10 +188,11 @@ export async function renderVideo(id: string): Promise<ProjectRecord> {
   const paths = projectPaths(id);
   try {
     const imageDataUrl = `data:image/png;base64,${(await readFile(project.imagePath)).toString("base64")}`;
-    const inputProps = { imageDataUrl, structure: project.structure, animation: project.animation };
+    const animation = normalizeAnimation(project.structure, project.animation);
+    const inputProps = { imageDataUrl, structure: project.structure, animation };
     const serveUrl = await bundle({ entryPoint: path.join(ROOT, "src", "remotion", "index.tsx") });
     const composition = await selectComposition({ serveUrl, id: "DiagramVideo", inputProps });
-    await renderMedia({ serveUrl, composition: { ...composition, durationInFrames: getVideoDurationFrames(project.animation) }, codec: "h264", outputLocation: paths.video, inputProps, concurrency: 1, crf: 18 });
+    await renderMedia({ serveUrl, composition: { ...composition, durationInFrames: getVideoDurationFrames(animation) }, codec: "h264", outputLocation: paths.video, inputProps, concurrency: 1, crf: 18 });
     return updateProject(id, (record) => { record.videoPath = paths.video; record.stage = "complete"; record.error = undefined; withMessage(record, "assistant", "mp4の書き出しが完了しました。プレビューして、良ければ成功例として保存できます。"); });
   } catch (error) {
     await updateProject(id, (record) => { record.stage = "failed"; record.error = error instanceof Error ? error.message : "動画の書き出しに失敗しました。"; });

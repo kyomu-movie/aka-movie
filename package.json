@@ -9,8 +9,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "codex:new": "tsx scripts/create-codex-project.ts",
+    "codex:validate-animation": "tsx scripts/validate-codex-animation.ts",
     "codex:render": "tsx scripts/render-codex-video.ts",
     "codex:share": "tsx scripts/share-codex-video.ts",
+    "codex:push-video": "tsx scripts/push-codex-video.ts",
+    "codex:publish-learning": "tsx scripts/publish-learning.ts",
     "codex:install-skill": "powershell -ExecutionPolicy Bypass -File scripts/install-codex-skill.ps1"
   },
   "dependencies": {

@@ -18,13 +18,8 @@
 
 ## 動画共有
 
-各メンバーは Git LFS をインストールしてから clone します。共有したい動画について次を実行します。
-
-```powershell
-npm.cmd run codex:share -- 260712_01
-git add shared-videos/260712_01
-git commit -m "share: 260712_01"
-git push origin <member-branch>
-```
+各メンバーは Git LFS をインストールしてから clone します。完成 MP4 を確認して `OK` と返すと、Codex が共有用フォルダへの準備、個人ブランチへの push、ドラフト PR の作成を行います。GitHub のログインや実行許可だけは本人が承認します。
 
 `review-request.md` には、改善点の事実や意図だけを残します。ルールの候補や承認済みルールはメンバーが編集しません。
+
+オーナーがルールや成功事例を公開するときは、先に `npm.cmd run codex:publish-learning` で対象一覧を確認します。内容を承認したときだけ `npm.cmd run codex:publish-learning -- --confirm` を実行します。`leran_rule/candidates/` は公開対象ではありません。

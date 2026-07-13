@@ -5,6 +5,6 @@ For requests to create, revise, approve, render, or share a script-driven diagra
 - Do not use `OPENAI_API_KEY` or the OpenAI API for the Codex-local workflow.
 - Read `leran_rule/approved/` before each job. Treat `candidates/` as unapproved.
 - Keep generated images and original MP4 files inside ignored `export/` folders.
-- To share a finished video on GitHub, run `npm.cmd run codex:share -- <project-id>`. This copies only the MP4 and a review note into `shared-videos/`; Git LFS manages the MP4.
-- Members must not create, edit, or promote learning rules. They may only add a non-rule note in the video's `review-request.md`; the repository owner manually decides whether to make a rule change.
+- After presenting a verified finished MP4, treat the user's final explicit `OK` as authorization to run `npm.cmd run codex:share -- <project-id>`, then `npm.cmd run codex:push-video -- <project-id>`, and create a draft PR. This copies only the MP4 and a review note into `shared-videos/`; Git LFS manages the MP4 and the push command rejects other paths. Pause only for GitHub authentication or an execution permission; do not require a separate sharing request.
+- Members must not create, edit, or promote learning rules. They may only add a non-rule note in the video's `review-request.md`; the repository owner manually decides whether to make a rule change. The owner previews approved learning changes with `npm.cmd run codex:publish-learning`, then pushes only after explicit approval with `npm.cmd run codex:publish-learning -- --confirm`.
 - Share only approved rules, success metadata, and intentionally shared video deliverables through Git. Show changed learning files and obtain explicit owner approval before any commit or push that includes them.

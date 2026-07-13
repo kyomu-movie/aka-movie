@@ -1,5 +1,9 @@
+import { execFile } from "node:child_process";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 function argument(name: string): string | undefined {
   const index = process.argv.indexOf(name);
@@ -12,6 +16,15 @@ function datePrefix(date = new Date()): string {
   return `${part("year")}${part("month")}${part("day")}`;
 }
 
+async function createProjectBranch(root: string, id: string): Promise<string> {
+  const branch = `video/${id}`;
+  const { stdout } = await execFileAsync("git", ["rev-parse", "--is-inside-work-tree"], { cwd: root, windowsHide: true });
+  if (stdout.trim() !== "true") throw new Error("Git リポジトリ内で実行してください。");
+  await execFileAsync("git", ["switch", "main"], { cwd: root, windowsHide: true });
+  await execFileAsync("git", ["switch", "-c", branch], { cwd: root, windowsHide: true });
+  return branch;
+}
+
 async function main(): Promise<void> {
   const script = argument("--script")?.trim();
   if (!script) throw new Error("--script に台本を指定してください。");
@@ -20,11 +33,12 @@ async function main(): Promise<void> {
   const prefix = datePrefix();
   const ids = (await readdir(exportDir, { withFileTypes: true })).filter((entry) => entry.isDirectory() && new RegExp(`^${prefix}_\\d{2}$`).test(entry.name)).map((entry) => Number(entry.name.slice(prefix.length + 1)));
   const id = `${prefix}_${String((ids.length ? Math.max(...ids) : 0) + 1).padStart(2, "0")}`;
+  const branch = await createProjectBranch(process.cwd(), id);
   const projectDir = path.join(exportDir, id);
   const structureDir = path.join(projectDir, `${id}_構造`);
   await mkdir(structureDir, { recursive: true });
   await writeFile(path.join(structureDir, "project.json"), JSON.stringify({ id, script, createdAt: new Date().toISOString(), mode: "codex-local" }, null, 2), "utf8");
-  console.log(JSON.stringify({ id, projectDir, structureDir, image: path.join(structureDir, "generated-image.png"), structure: path.join(structureDir, "structure.json"), animation: path.join(structureDir, "animation.json"), video: path.join(projectDir, `${id}.mp4`) }, null, 2));
+  console.log(JSON.stringify({ id, branch, projectDir, structureDir, image: path.join(structureDir, "generated-image.png"), structure: path.join(structureDir, "structure.json"), animation: path.join(structureDir, "animation.json"), video: path.join(projectDir, `${id}.mp4`) }, null, 2));
 }
 
 main().catch((error) => { console.error(error instanceof Error ? error.message : error); process.exit(1); });

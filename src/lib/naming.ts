@@ -1,5 +1,4 @@
 import { VIDEO } from "./constants";
-import type { AnimationItem } from "./types";
 
 const TOKYO = "Asia/Tokyo";
 export function datePrefix(date = new Date()): string {
@@ -13,7 +12,7 @@ export function nextProjectId(existingIds: string[], date = new Date()): string 
   return `${prefix}_${String((numbers.length ? Math.max(...numbers) : 0) + 1).padStart(2, "0")}`;
 }
 export function assertProjectId(id: string): void { if (!/^\d{6}_\d{2}$/.test(id)) throw new Error("不正な案件IDです。"); }
-export function getVideoDurationFrames(animation: AnimationItem[]): number {
+export function getVideoDurationFrames<T extends { delayMs: number; durationMs: number }>(animation: T[]): number {
   const lastMs = animation.reduce((max, item) => Math.max(max, item.delayMs + item.durationMs), 0);
   return Math.min(VIDEO.maxSeconds, Math.max(VIDEO.minSeconds, Math.ceil((lastMs + 1800) / 1000))) * VIDEO.fps;
 }
