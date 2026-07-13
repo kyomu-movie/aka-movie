@@ -7,7 +7,7 @@
 まずは [これだけやればOK 最短手順](docs/member-quickstart-ja.md) を実行してください。説明が必要な場合は、[メンバー向けセットアップ・利用手順書](docs/member-guide-ja.md) を参照してください。
 
 - 作業途中の画像や MP4 は `export/` に保存され、Git には追加しません。
-- 共有する完成 MP4 だけを `shared-videos/` に準備し、Git LFS で管理します。
+- 共有する完成 MP4 だけを「完了動画共有フォルダ」`shared-videos/` に準備し、Git LFS で管理します。
 - メンバーは `leran_rule/` を変更しません。改善点は動画ごとの `review-request.md` に記録し、オーナーが手動で判断します。
 
 ## オーナーの方へ
@@ -21,3 +21,14 @@
 - `shared-videos/` — 意図して共有する MP4、メタデータ、レビュー待ちメモ
 - `leran_rule/approved/` — オーナー承認済みの共有ルール
 - `skill/movie-create/` — Codex で使う動画作成スキル
+
+## 完成動画と学習内容の公開
+
+動画の完成後は、次の2つを順番に実行します。これで `shared-videos/<project-id>/` だけが個人用ブランチへ commit・push されます。
+
+```powershell
+npm.cmd run codex:share -- <project-id>
+npm.cmd run codex:push-video -- <project-id>
+```
+
+`leran_rule/` はオーナー専用です。オーナーは内容を確認してから `npm.cmd run codex:publish-learning` で公開対象を確認し、承認したときだけ `npm.cmd run codex:publish-learning -- --confirm` を実行します。候補ルールやメンバーのメモは公開対象に含めません。

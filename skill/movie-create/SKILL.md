@@ -19,10 +19,10 @@ Use the repository's `reference/`, `leran_rule/approved/`, and `skill/` folders 
 ## Learning and GitHub Sharing
 
 - Members must not create, modify, or promote files in `leran_rule/`. They must not turn corrections into rules.
-- A member who shares a finished video runs `npm.cmd run codex:share -- <project-id>` and may add factual context only to that video's `shared-videos/<project-id>/review-request.md`.
+- A member who shares a finished video runs `npm.cmd run codex:share -- <project-id>`, may add factual context only to that video's `shared-videos/<project-id>/review-request.md`, then runs `npm.cmd run codex:push-video -- <project-id>`. This command refuses to publish anything outside that finished video's folder.
 - The review note is not a rule. The repository owner alone decides whether to create a candidate or promote an approved rule after reviewing the shared video.
 - Store only a short success summary and file metadata in `leran_rule/successes/`; do not commit source scripts or private images. The user has explicitly authorized committing intentionally shared MP4s in `shared-videos/` through Git LFS.
-- Before using shared learning, pull the repository's latest approved rules. After an approved change, show the files that changed and wait for explicit approval before committing or pushing to GitHub.
+- Before using shared learning, pull the repository's latest approved rules. The owner alone runs `npm.cmd run codex:publish-learning` to show the allowed files, and only after explicit approval runs `npm.cmd run codex:publish-learning -- --confirm`. Candidates are never published by this command.
 
 ## Required Visual Rules
 

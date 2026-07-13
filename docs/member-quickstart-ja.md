@@ -3,7 +3,7 @@
 この手順だけで、動画を作って GitHub の PR に出せます。コードは Codex に実行してもらえます。分からなくなったら作業を止め、エラー画面をオーナーへ送ってください。
 
 > [!IMPORTANT]
-> `main` と `leran_rule/` は触りません。共有するのは `shared-videos/` だけです。GitHub のログイン画面や実行許可が出たら、自分で承認します。
+> `main` と `leran_rule/` は触りません。共有するのは「完了動画共有フォルダ」`shared-videos/` だけです。GitHub のログイン画面や実行許可が出たら、自分で承認します。
 
 ## 1. 招待を受け入れたら、Codex に初回セットアップを頼む
 
@@ -68,8 +68,10 @@ project ID は 260712_01 です。
 内容を確認してから、Codex に次を送ります。
 
 ```text
-shared-videos/260712_01 だけを Git に追加してください。
-commit、個人ブランチへの push、GitHub の PR 作成まで進めてください。
+完成動画を GitHub に共有してください。
+npm.cmd run codex:push-video -- 260712_01 を実行してください。
+shared-videos/260712_01 だけを commit・push してください。
+続けて GitHub の PR を作成してください。
 GitHub のログインや実行許可が必要なら止まって教えてください。
 ```
 

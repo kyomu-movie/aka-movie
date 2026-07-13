@@ -22,9 +22,9 @@
 
 ```powershell
 npm.cmd run codex:share -- 260712_01
-git add shared-videos/260712_01
-git commit -m "share: 260712_01"
-git push origin <member-branch>
+npm.cmd run codex:push-video -- 260712_01
 ```
 
 `review-request.md` には、改善点の事実や意図だけを残します。ルールの候補や承認済みルールはメンバーが編集しません。
+
+オーナーがルールや成功事例を公開するときは、先に `npm.cmd run codex:publish-learning` で対象一覧を確認します。内容を承認したときだけ `npm.cmd run codex:publish-learning -- --confirm` を実行します。`leran_rule/candidates/` は公開対象ではありません。

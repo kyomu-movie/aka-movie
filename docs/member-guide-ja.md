@@ -117,7 +117,7 @@ flowchart LR
 npm.cmd run codex:share -- 260712_01
 ```
 
-このコマンドは、`export/260712_01/260712_01.mp4` を次の共有用フォルダへコピーします。
+このコマンドは、`export/260712_01/260712_01.mp4` を次の「完了動画共有フォルダ」へコピーします。
 
 ```text
 shared-videos/260712_01/
@@ -143,13 +143,10 @@ shared-videos/260712_01/
 
 共有用フォルダだけをコミットし、個人ブランチへ push します。
 
-commit、push、PR 作成も動画作成スキルだけでは自動実行されません。Codex に「`shared-videos/<project-id>/` だけを commit し、個人ブランチへ push して PR を作成してください」と頼めます。GitHub のログイン画面や実行許可が出たときは本人が承認します。
+完成動画の共有は、次のコマンド1つで行えます。`shared-videos/<project-id>/` だけを commit・push し、ほかのファイルや `leran_rule/` は公開しません。
 
 ```powershell
-git status
-git add shared-videos/260712_01
-git commit -m "share: 260712_01"
-git push -u origin video/260712_01
+npm.cmd run codex:push-video -- 260712_01
 ```
 
 GitHub でリポジトリを開き、**Compare & pull request** を選びます。PR には次を記載します。
@@ -189,7 +186,7 @@ leran_rule/successes/
 - [ ] Git LFS、Node.js、Codex を準備した
 - [ ] `$movie-create` で画像・構造・アニメーションを確認し、必要な段階で `OK` を返した
 - [ ] `npm.cmd run codex:share -- <project-id>` を実行した
-- [ ] `shared-videos/<project-id>/` だけをコミットした
+- [ ] `npm.cmd run codex:push-video -- <project-id>` を実行した
 - [ ] `review-request.md` に必要な事実と意図だけを記入した
 - [ ] 個人ブランチから PR を作成した
 - [ ] `leran_rule/` を変更していない
