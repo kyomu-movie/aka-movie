@@ -24,11 +24,6 @@
 
 ## 完成動画と学習内容の公開
 
-動画の完成後は、次の2つを順番に実行します。これで `shared-videos/<project-id>/` だけが個人用ブランチへ commit・push されます。
-
-```powershell
-npm.cmd run codex:share -- <project-id>
-npm.cmd run codex:push-video -- <project-id>
-```
+動画の完成後、Codex が表示する MP4 を確認して `OK` と返すと、`shared-videos/<project-id>/` だけが個人用ブランチへ commit・push され、ドラフト PR が作成されます。GitHub のログインや実行許可が出たときだけ本人が承認します。
 
 `leran_rule/` はオーナー専用です。オーナーは内容を確認してから `npm.cmd run codex:publish-learning` で公開対象を確認し、承認したときだけ `npm.cmd run codex:publish-learning -- --confirm` を実行します。候補ルールやメンバーのメモは公開対象に含めません。

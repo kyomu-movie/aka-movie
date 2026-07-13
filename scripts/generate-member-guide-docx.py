@@ -322,8 +322,8 @@ def add_flow(doc: Document) -> None:
     for index, item in enumerate((
         "台本を渡す",
         "画像・構造・アニメーションを確認し、必要な段階で OK を返す",
-        "MP4 を描画して、共有用 MP4 を準備する",
-        "個人ブランチから PR を作成し、オーナー確認を待つ",
+        "MP4 を描画して確認し、最後の OK で共有する",
+        "Codex が個人ブランチへ push・PR 作成し、オーナー確認を待つ",
     ), start=1):
         paragraph = doc.add_paragraph()
         paragraph.paragraph_format.left_indent = Inches(0.38)

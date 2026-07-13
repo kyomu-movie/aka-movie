@@ -77,8 +77,8 @@ def add_flow(story, styles) -> None:
     flow = [
         "1. 台本を渡す",
         "2. 画像・構造・アニメーションを確認し、必要な段階で OK を返す",
-        "3. MP4 を描画して、共有用 MP4 を準備する",
-        "4. 個人ブランチから PR を作成し、オーナー確認を待つ",
+        "3. MP4 を描画して確認し、最後の OK で共有する",
+        "4. Codex が個人ブランチへ push・PR 作成し、オーナー確認を待つ",
     ]
     data = [[Paragraph(text, styles["body"])] for text in flow]
     table = Table(data, colWidths=[6.15 * inch], hAlign="LEFT")
