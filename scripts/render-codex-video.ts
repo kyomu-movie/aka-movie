@@ -5,9 +5,10 @@ import { promisify } from "node:util";
 import { bundle } from "@remotion/bundler";
 import { renderMedia, selectComposition } from "@remotion/renderer";
 import sharp from "sharp";
+import { normalizeAnimation } from "../src/lib/animation";
 import { VIDEO } from "../src/lib/constants";
 import { getVideoDurationFrames } from "../src/lib/naming";
-import type { AnimationItem, DiagramLayer, DiagramStructure } from "../src/lib/types";
+import type { DiagramLayer, DiagramStructure } from "../src/lib/types";
 
 const LAYER_PADDING = 4;
 const execFileAsync = promisify(execFile);
@@ -149,8 +150,7 @@ async function main(): Promise<void> {
   const project = JSON.parse(await readFile(path.join(structureDir, "project.json"), "utf8")) as { outputDurationSeconds?: number };
   const image = await normalizeSolidRed(await readFile(path.join(structureDir, "generated-image.png")));
   const structure = JSON.parse(await readFile(path.join(structureDir, "structure.json"), "utf8")) as DiagramStructure;
-  const animation = JSON.parse(await readFile(path.join(structureDir, "animation.json"), "utf8")) as AnimationItem[];
-  if (!structure.elements.length || !animation.length) throw new Error("structure.json と animation.json に要素を設定してください。");
+  const animation = normalizeAnimation(structure, JSON.parse(await readFile(path.join(structureDir, "animation.json"), "utf8")) as unknown);
   const layerAssets = await buildTransparentLayers(image, structure, path.join(structureDir, "layers"));
   const inputProps = { imageDataUrl: `data:image/png;base64,${image.toString("base64")}`, structure, animation, layerAssets };
   const serveUrl = await bundle({ entryPoint: path.join(root, "src", "remotion", "index.tsx") });
@@ -158,6 +158,9 @@ async function main(): Promise<void> {
   const outputLocation = path.join(projectDir, `${id}.mp4`);
   const intermediateLocation = path.join(projectDir, `${id}-intermediate.mov`);
   const stagedOutputLocation = path.join(projectDir, `${id}-high-quality.mp4`);
+  if (project.outputDurationSeconds !== undefined && (!Number.isInteger(project.outputDurationSeconds) || project.outputDurationSeconds < VIDEO.minSeconds || project.outputDurationSeconds > VIDEO.maxSeconds)) {
+    throw new Error(`outputDurationSeconds は ${VIDEO.minSeconds}〜${VIDEO.maxSeconds} の整数で指定してください。`);
+  }
   const durationInFrames = project.outputDurationSeconds ? project.outputDurationSeconds * VIDEO.fps : getVideoDurationFrames(animation);
   if (!Number.isInteger(durationInFrames) || durationInFrames < getVideoDurationFrames(animation)) throw new Error("出力時間がアニメーションより短く設定されています。");
   await renderMedia({

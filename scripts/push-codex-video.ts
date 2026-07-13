@@ -71,6 +71,7 @@ async function main(): Promise<void> {
 
   await access(path.join(root, sharedVideo));
   await access(path.join(root, sharedDirectory, "metadata.json"));
+  await access(path.join(root, sharedDirectory, "animation-summary.json"));
   await access(path.join(root, sharedDirectory, "review-request.md"));
   await assertLfsTracking();
   assertOnlySharedVideo(await changedPaths());

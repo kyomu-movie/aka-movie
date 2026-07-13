@@ -62,6 +62,12 @@ def set_cell_margins(cell) -> None:
         node.set(qn("w:type"), "dxa")
 
 
+def prevent_row_split(row) -> None:
+    properties = row._tr.get_or_add_trPr()
+    if properties.find(qn("w:cantSplit")) is None:
+        properties.append(OxmlElement("w:cantSplit"))
+
+
 def set_table_geometry(table, widths: list[int]) -> None:
     table.alignment = WD_TABLE_ALIGNMENT.LEFT
     table.autofit = False
@@ -87,6 +93,7 @@ def set_table_geometry(table, widths: list[int]) -> None:
     for index, grid_col in enumerate(grid.gridCol_lst):
         grid_col.set(qn("w:w"), str(widths[index]))
     for row in table.rows:
+        prevent_row_split(row)
         for index, cell in enumerate(row.cells):
             set_cell_width(cell, widths[index])
             set_cell_margins(cell)
@@ -305,11 +312,16 @@ def add_markdown_table(doc: Document, headers: list[str], rows: list[list[str]])
         set_run_font(run, size=10, color=INK, bold=True)
     for row_values in rows:
         cells = table.add_row().cells
+        prevent_row_split(table.rows[-1])
         for index, value in enumerate(row_values):
             paragraph = cells[index].paragraphs[0]
             paragraph.paragraph_format.space_after = Pt(0)
             run = paragraph.add_run(value)
             set_run_font(run, size=9.5, color=INK)
+    for row in table.rows[:-1]:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                paragraph.paragraph_format.keep_with_next = True
     doc.add_paragraph().paragraph_format.space_after = Pt(0)
 
 
@@ -317,26 +329,30 @@ def add_flow(doc: Document) -> None:
     intro = doc.add_paragraph()
     intro.paragraph_format.space_before = Pt(4)
     intro.paragraph_format.space_after = Pt(4)
+    intro.paragraph_format.keep_with_next = True
     run = intro.add_run("動画作成・共有フロー")
     set_run_font(run, size=11, color=DARK_BLUE, bold=True)
     for index, item in enumerate((
         "台本を渡す",
-        "画像・構造・アニメーションを確認し、必要な段階で OK を返す",
+        "画像・構造・日本語タイムラインを確認し、必要な段階で OK を返す",
         "MP4 を描画して確認し、最後の OK で共有する",
         "Codex が個人ブランチへ push・PR 作成し、オーナー確認を待つ",
+        "オーナー承認後、Codex が学習案を提示し、承認された内容だけ反映する",
     ), start=1):
         paragraph = doc.add_paragraph()
         paragraph.paragraph_format.left_indent = Inches(0.38)
         paragraph.paragraph_format.first_line_indent = Inches(-0.19)
         paragraph.paragraph_format.space_after = Pt(2)
+        paragraph.paragraph_format.keep_with_next = index < 5
         marker = paragraph.add_run(f"{index}. ")
         set_run_font(marker, size=10.5, color=BLUE, bold=True)
         run = paragraph.add_run(item)
         set_run_font(run, size=10.5, color=INK)
-        if index < 4:
+        if index < 5:
             arrow = doc.add_paragraph()
             arrow.paragraph_format.left_indent = Inches(0.38)
             arrow.paragraph_format.space_after = Pt(2)
+            arrow.paragraph_format.keep_with_next = True
             run = arrow.add_run("↓")
             set_run_font(run, size=10, color=MUTED)
 
@@ -356,11 +372,10 @@ def render_markdown(doc: Document, source: str) -> None:
             index += 1
             continue
         if line.startswith("## "):
-            if line == "## 1. このプロジェクトでできること":
+            if line.startswith("## Codex "):
                 doc.add_page_break()
             paragraph = doc.add_paragraph(line[3:].strip(), style="Heading 1")
-            if line != "## 8. 困ったとき":
-                paragraph.paragraph_format.keep_with_next = True
+            paragraph.paragraph_format.keep_with_next = True
             index += 1
             continue
         if line.startswith("### "):
@@ -388,6 +403,7 @@ def render_markdown(doc: Document, source: str) -> None:
                 paragraph = doc.add_paragraph(style="Guide Code")
                 paragraph.paragraph_format.left_indent = Inches(0.18)
                 paragraph.paragraph_format.right_indent = Inches(0.18)
+                paragraph.paragraph_format.keep_together = True
                 run = paragraph.add_run("\n".join(block))
                 set_run_font(run, size=9, color=INK, code=True)
             continue
@@ -406,9 +422,10 @@ def render_markdown(doc: Document, source: str) -> None:
                 entries.append(re.sub(r"^\d+\. ", "", lines[index]))
                 index += 1
             add_numbering(doc, next_abstract, next_num, bullet=False)
-            for entry in entries:
+            for item_index, entry in enumerate(entries):
                 paragraph = doc.add_paragraph()
                 paragraph.paragraph_format.space_after = Pt(4)
+                paragraph.paragraph_format.keep_with_next = item_index < len(entries) - 1
                 apply_list_number(paragraph, next_num)
                 run = paragraph.add_run(entry)
                 set_run_font(run, size=11, color=INK)
@@ -421,9 +438,10 @@ def render_markdown(doc: Document, source: str) -> None:
                 entries.append(lines[index][2:])
                 index += 1
             add_numbering(doc, next_abstract, next_num, bullet=True)
-            for entry in entries:
+            for item_index, entry in enumerate(entries):
                 paragraph = doc.add_paragraph()
                 paragraph.paragraph_format.space_after = Pt(4)
+                paragraph.paragraph_format.keep_with_next = item_index < len(entries) - 1
                 apply_list_number(paragraph, next_num)
                 run = paragraph.add_run(entry)
                 set_run_font(run, size=11, color=INK)
@@ -434,7 +452,7 @@ def render_markdown(doc: Document, source: str) -> None:
             paragraph = doc.add_paragraph()
             paragraph.paragraph_format.left_indent = Inches(0.375)
             paragraph.paragraph_format.first_line_indent = Inches(-0.19)
-            paragraph.paragraph_format.space_after = Pt(4)
+            paragraph.paragraph_format.space_after = Pt(2)
             checkbox = paragraph.add_run("□ ")
             set_run_font(checkbox, size=11, color=BLUE, bold=True)
             run = paragraph.add_run(line[6:])
