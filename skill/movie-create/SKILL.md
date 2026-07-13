@@ -9,8 +9,8 @@ Use the repository's `reference/`, `leran_rule/approved/`, and `skill/` folders 
 
 ## Workflow
 
-1. Run `scripts/validate-learning.ps1 -RepoRoot <repository-root>`, then read every approved rule in `leran_rule/approved/` and the base style in `skill/style-base/SKILL.md`.
-2. Create a numbered output folder with `npm.cmd run codex:new -- --script "<台本>"`.
+1. Run `skill/movie-create/scripts/validate-learning.ps1 -RepoRoot <repository-root>`, then read every approved rule in `leran_rule/approved/` and the base style in `skill/style-base/SKILL.md`.
+2. Create a numbered output folder with `npm.cmd run codex:new -- --script "<台本>"`. This returns to local `main`, then automatically creates and switches to `video/<project-id>`; confirm the returned `branch` value before continuing.
 3. Create one 16:9-safe-area diagram using the native image-generation capability when it is available in the Codex session. Use all images in `reference/` only as style references. If native image generation is unavailable, ask the user to attach or place the approved diagram at the path reported by `codex:new`.
 4. Save the diagram as `generated-image.png`. Present it to the user and wait for an explicit `OK`. Treat any other response as a correction.
 5. Convert the approved image into `structure.json` and `animation.json` using the schema in [references/project-format.md](references/project-format.md). Use title → relation → node → annotation order by default; allow the user to change order, motion, and timing.
