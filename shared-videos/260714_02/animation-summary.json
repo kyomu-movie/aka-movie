@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 2,
+  "animationFormat": "keyframes",
+  "animationEndMs": 6000,
+  "finalHoldMs": 1800,
+  "elements": [
+    {
+      "order": 1,
+      "kind": "group",
+      "delayMs": 0,
+      "durationMs": 2000,
+      "keyframeCount": 3,
+      "motionProperties": [
+        "opacity",
+        "y",
+        "scale"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 2,
+      "kind": "group",
+      "delayMs": 2000,
+      "durationMs": 2000,
+      "keyframeCount": 3,
+      "motionProperties": [
+        "opacity",
+        "y",
+        "scale"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 3,
+      "kind": "group",
+      "delayMs": 4000,
+      "durationMs": 2000,
+      "keyframeCount": 4,
+      "motionProperties": [
+        "opacity",
+        "y",
+        "scale"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    }
+  ]
+}
