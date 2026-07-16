@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "animationFormat": "keyframes",
+  "animationEndMs": 3100,
+  "finalHoldMs": 1800,
+  "elements": [
+    {
+      "order": 1,
+      "kind": "title",
+      "delayMs": 0,
+      "durationMs": 400,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 2,
+      "kind": "node",
+      "delayMs": 400,
+      "durationMs": 900,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 3,
+      "kind": "relation",
+      "delayMs": 1300,
+      "durationMs": 900,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "path",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 4,
+      "kind": "node",
+      "delayMs": 2200,
+      "durationMs": 900,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    }
+  ]
+}
