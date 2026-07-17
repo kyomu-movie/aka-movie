@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "animationFormat": "keyframes",
+  "animationEndMs": 7850,
+  "finalHoldMs": 1800,
+  "elements": [
+    {
+      "order": 1,
+      "kind": "annotation",
+      "delayMs": 0,
+      "durationMs": 900,
+      "keyframeCount": 3,
+      "motionProperties": [
+        "opacity",
+        "y",
+        "scale"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 2,
+      "kind": "node",
+      "delayMs": 400,
+      "durationMs": 1600,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 3,
+      "kind": "annotation",
+      "delayMs": 400,
+      "durationMs": 1600,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 4,
+      "kind": "node",
+      "delayMs": 2700,
+      "durationMs": 1300,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 5,
+      "kind": "group",
+      "delayMs": 2700,
+      "durationMs": 1500,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 6,
+      "kind": "annotation",
+      "delayMs": 2700,
+      "durationMs": 1500,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 7,
+      "kind": "relation",
+      "delayMs": 4700,
+      "durationMs": 1200,
+      "keyframeCount": 3,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "path",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 8,
+      "kind": "annotation",
+      "delayMs": 6000,
+      "durationMs": 800,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity",
+        "x",
+        "y",
+        "scale"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 9,
+      "kind": "node",
+      "delayMs": 6350,
+      "durationMs": 1500,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 10,
+      "kind": "annotation",
+      "delayMs": 6350,
+      "durationMs": 1500,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    }
+  ]
+}
