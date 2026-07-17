@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 2,
+  "animationFormat": "keyframes",
+  "animationEndMs": 9850,
+  "finalHoldMs": 1800,
+  "elements": [
+    {
+      "order": 1,
+      "kind": "group",
+      "delayMs": 0,
+      "durationMs": 1000,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 2,
+      "kind": "relation",
+      "delayMs": 1000,
+      "durationMs": 700,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 3,
+      "kind": "group",
+      "delayMs": 1550,
+      "durationMs": 1200,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 4,
+      "kind": "relation",
+      "delayMs": 2750,
+      "durationMs": 700,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 5,
+      "kind": "group",
+      "delayMs": 3300,
+      "durationMs": 1200,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 6,
+      "kind": "relation",
+      "delayMs": 4500,
+      "durationMs": 600,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "clip-y",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 7,
+      "kind": "group",
+      "delayMs": 4950,
+      "durationMs": 1200,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 8,
+      "kind": "relation",
+      "delayMs": 6150,
+      "durationMs": 700,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "reverse"
+    },
+    {
+      "order": 9,
+      "kind": "group",
+      "delayMs": 6700,
+      "durationMs": 1200,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    },
+    {
+      "order": 10,
+      "kind": "relation",
+      "delayMs": 7900,
+      "durationMs": 700,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "reveal"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "reverse"
+    },
+    {
+      "order": 11,
+      "kind": "group",
+      "delayMs": 8450,
+      "durationMs": 1400,
+      "keyframeCount": 2,
+      "motionProperties": [
+        "opacity"
+      ],
+      "revealMode": "clip-x",
+      "revealDirection": "forward"
+    }
+  ]
+}
